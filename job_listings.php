@@ -1,63 +1,39 @@
 <?php
-session_start();
-
-// Check if admin is logged in
-if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-    header("Location: admin_login.php");
-    exit();
-}
-
+// job_listings.php
 require_once 'db_connection.php';
 
-// Debugging: Check database connection
+// Fetch approved job postings
 try {
-    // Simple test query
-    $test_query = $pdo->query("SELECT 1");
-    
-    // If you want to test job postings table specifically
-    $table_check = $pdo->query("SHOW TABLES LIKE 'job_postings'");
-    $table_exists = $table_check->rowCount() > 0;
-    
-    // If table doesn't exist, create it
-    if (!$table_exists) {
-        $create_table_sql = "
-        CREATE TABLE job_postings (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            company_name VARCHAR(255) NOT NULL,
-            job_title VARCHAR(255) NOT NULL,
-            job_type ENUM('internship', 'part-time', 'full-time', 'entry-level') NOT NULL,
-            location VARCHAR(255),
-            qualifications TEXT,
-            job_description TEXT NOT NULL,
-            contact_email VARCHAR(255) NOT NULL,
-            contact_phone VARCHAR(20),
-            status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-        )";
-        
-        $pdo->exec($create_table_sql);
-        echo "Table created successfully. ";
-    }
-
-    // Simplified statistics query
-    $stats_query = $pdo->query("
-        SELECT 
-            COUNT(*) as total_postings,
-            0 as pending_postings,
-            0 as approved_postings
-    ");
-    $stats = $stats_query->fetch(PDO::FETCH_ASSOC);
-
-    // Debug output
-    echo "Database connection successful! ";
-    print_r($stats);
-
+    $stmt = $pdo->query("SELECT * FROM job_postings WHERE status = 'approved' ORDER BY created_at DESC");
+    $job_postings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch(PDOException $e) {
-    echo "Error: " . $e->getMessage();
-    exit();
+    $job_postings = [];
+    $error = "Unable to retrieve job postings: " . $e->getMessage();
+}
+
+// Filter and search functionality
+$search_query = isset($_GET['search']) ? trim($_GET['search']) : '';
+$job_type_filter = isset($_GET['job_type']) ? $_GET['job_type'] : '';
+
+if (!empty($search_query) || !empty($job_type_filter)) {
+    $filtered_postings = array_filter($job_postings, function($posting) use ($search_query, $job_type_filter) {
+        $match_search = empty($search_query) || 
+            stripos($posting['job_title'], $search_query) !== false || 
+            stripos($posting['company_name'], $search_query) !== false ||
+            stripos($posting['location'], $search_query) !== false;
+        
+        $match_type = empty($job_type_filter) || $posting['job_type'] === $job_type_filter;
+        
+        return $match_search && $match_type;
+    });
+} else {
+    $filtered_postings = $job_postings;
 }
 ?>
+
+
+
+
 
 
 
@@ -100,6 +76,8 @@ try {
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
+
+  
 
 </head>
 
@@ -173,31 +151,59 @@ try {
         </p>
       </div>
       <div class="row">
-      <div class="admin-container">
-        <header>
-            <h1>Admin Dashboard</h1>
-            <a href="logout.php" class="logout-btn">Logout</a>
-        </header>
-        
-        <div class="dashboard-stats">
-            <div class="stat-card">
-                <h3>Total Job Postings</h3>
-                <p><?php echo $stats['total_postings'] ?? 0; ?></p>
-            </div>
-            <div class="stat-card">
-                <h3>Pending Postings</h3>
-                <p><?php echo $stats['pending_postings'] ?? 0; ?></p>
-            </div>
-            <div class="stat-card">
-                <h3>Approved Postings</h3>
-                <p><?php echo $stats['approved_postings'] ?? 0; ?></p>
-            </div>
-        </div>
+      <div class="job-search">
+        <form method="GET">
+            <input 
+                type="text" 
+                name="search" 
+                placeholder="Search jobs..." 
+                value="<?php echo htmlspecialchars($search_query); ?>"
+                style="flex-grow: 1; padding: 10px;"
+            >
+            <select name="job_type" style="padding: 10px;">
+                <option value="">All Job Types</option>
+                <option value="internship" <?php echo $job_type_filter === 'internship' ? 'selected' : ''; ?>>Internship</option>
+                <option value="part-time" <?php echo $job_type_filter === 'part-time' ? 'selected' : ''; ?>>Part-Time</option>
+                <option value="full-time" <?php echo $job_type_filter === 'full-time' ? 'selected' : ''; ?>>Full-Time</option>
+                <option value="entry-level" <?php echo $job_type_filter === 'entry-level' ? 'selected' : ''; ?>>Entry-Level</option>
+            </select>
+            <button type="submit" style="padding: 10px;">Search</button>
+        </form>
+    </div>
 
-        <nav>
-            <a href="manage_postings.php" class="nav-btn">Manage Job Postings</a>
-            <a href="add_admin.php" class="nav-btn">Add Admin User</a>
-        </nav>
+    <div class="job-listings">
+        <?php if (empty($filtered_postings)): ?>
+            <p>No job postings found.</p>
+        <?php else: ?>
+            <?php foreach ($filtered_postings as $posting): ?>
+                <div class="job-card">
+                    <h2><?php echo htmlspecialchars($posting['job_title']); ?></h2>
+                    <p><strong>Company:</strong> <?php echo htmlspecialchars($posting['company_name']); ?></p>
+                    <span class="job-type"><?php echo htmlspecialchars($posting['job_type']); ?></span>
+                    
+                    <?php if (!empty($posting['location'])): ?>
+                        <p><strong>Location:</strong> <?php echo htmlspecialchars($posting['location']); ?></p>
+                    <?php endif; ?>
+                    
+                    <?php if (!empty($posting['qualifications'])): ?>
+                        <details>
+                            <summary>Qualifications</summary>
+                            <p><?php echo htmlspecialchars($posting['qualifications']); ?></p>
+                        </details>
+                    <?php endif; ?>
+                    
+                    <details>
+                        <summary>Job Description</summary>
+                        <p><?php echo htmlspecialchars($posting['job_description']); ?></p>
+                    </details>
+                    
+                    <div class="job-meta">
+                        <span>Posted: <?php echo date('M d, Y', strtotime($posting['created_at'])); ?></span>
+                        <a href="mailto:<?php echo htmlspecialchars($posting['contact_email']); ?>">Contact</a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
       </div>
     </div>
