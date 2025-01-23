@@ -6,4 +6,5 @@ echo "how are you";
 echo "how are you";
 echo "how are you";
 echo "how are you";
+echo "hi rat";
 ?>
