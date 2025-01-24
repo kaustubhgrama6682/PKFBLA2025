@@ -198,6 +198,7 @@ if (!empty($search_query) || !empty($job_type_filter)) {
                         <span>Posted: <?php echo date('M d, Y', strtotime($posting['created_at'])); ?></span>
                         <a href="mailto:<?php echo htmlspecialchars($posting['contact_email']); ?>">Contact</a>
                     </div>
+                    <a href="apply.php?id=<?php echo $posting['id']; ?>" class="btn btn-primary">Apply</a>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
