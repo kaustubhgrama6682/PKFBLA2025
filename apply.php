@@ -3,23 +3,30 @@
 require_once 'db_connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Handle form submission
     $name = $_POST['name'];
     $email = $_POST['email'];
+    $phone = $_POST['phone'];
     $resume = $_POST['resume'];
+    $cover_letter = $_POST['cover_letter'];
+    $education = $_POST['education'];
+    $work_experience = $_POST['work_experience'];
+    $skills = $_POST['skills'];
     $job_id = $_POST['job_id'];
 
-    // Validate and save the application to the database
-    $stmt = $pdo->prepare("INSERT INTO applications (name, email, resume, job_id) VALUES (:name, :email, :resume, :job_id)");
+    $stmt = $pdo->prepare("INSERT INTO applications (name, email, phone, resume, cover_letter, education, work_experience, skills, job_id) VALUES (:name, :email, :phone, :resume, :cover_letter, :education, :work_experience, :skills, :job_id)");
     $stmt->execute([
         'name' => $name,
         'email' => $email,
+        'phone' => $phone,
         'resume' => $resume,
+        'cover_letter' => $cover_letter,
+        'education' => $education,
+        'work_experience' => $work_experience,
+        'skills' => $skills,
         'job_id' => $job_id
     ]);
 
-    // Redirect the user to a success page or display a success message
-    header("Location: apply_success.php");
+    header("Location: success.php");
     exit;
 }
 
@@ -48,8 +55,28 @@ $job_posting = $stmt->fetch(PDO::FETCH_ASSOC);
             <input type="email" id="email" name="email" required>
         </div>
         <div>
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div>
             <label for="resume">Resume:</label>
             <input type="file" id="resume" name="resume" required>
+        </div>
+        <div>
+            <label for="cover_letter">Cover Letter:</label>
+            <textarea id="cover_letter" name="cover_letter" required></textarea>
+        </div>
+        <div>
+            <label for="education">Education:</label>
+            <input type="text" id="education" name="education" required>
+        </div>
+        <div>
+            <label for="work_experience">Work Experience:</label>
+            <textarea id="work_experience" name="work_experience" required></textarea>
+        </div>
+        <div>
+            <label for="skills">Skills:</label>
+            <textarea id="skills" name="skills" required></textarea>
         </div>
         <button type="submit">Apply</button>
     </form>
