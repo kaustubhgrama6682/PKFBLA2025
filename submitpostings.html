@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html>
 
@@ -69,10 +72,10 @@
                 <a class="nav-link" href="job_listings.php">View Postings</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="why.html">Apply</a>
+                <a class="nav-link" href="student_login.php"> <i class="fa fa-user" aria-hidden="true"></i> Student Login</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="admin_login.php"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
+                <a class="nav-link" href="admin_login.php"> <i class="fa fa-user" aria-hidden="true"></i> Admin Login</a>
               </li>
               <form class="form-inline">
                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
@@ -104,94 +107,70 @@
             <img src="images/about-img.png" alt="">
           </div>
         </div>
-        <form id="jobPostingForm" action="submit_job.php" method="POST">
-          <h1>Submit a Job Posting</h1>
-          
-          <div class="form-group">
-              <label for="companyName">Company Name</label>
-              <input 
-                  type="text" 
-                  id="companyName" 
-                  name="companyName" 
-                  placeholder="Enter company name" 
-                  required
-              >
-          </div>
-
-          <div class="form-group">
-              <label for="jobTitle">Job Title</label>
-              <input 
-                  type="text" 
-                  id="jobTitle" 
-                  name="jobTitle" 
-                  placeholder="Enter job title" 
-                  required
-              >
-          </div>
-
-          <div class="form-group">
-              <label for="jobType">Job Type</label>
-              <select id="jobType" name="jobType" required>
-                  <option value="">Select job type</option>
-                  <option value="internship">Internship</option>
-                  <option value="part-time">Part-Time</option>
-                  <option value="full-time">Full-Time</option>
-                  <option value="entry-level">Entry-Level</option>
-              </select>
-          </div>
-
-          <div class="form-group">
-              <label for="location">Job Location</label>
-              <input 
-                  type="text" 
-                  id="location" 
-                  name="location" 
-                  placeholder="Enter job location"
-              >
-          </div>
-
-          <div class="form-group">
-              <label for="qualifications">Required Qualifications</label>
-              <textarea 
-                  id="qualifications" 
-                  name="qualifications" 
-                  placeholder="List required skills, education, etc."
-              ></textarea>
-          </div>
-
-          <div class="form-group">
-              <label for="jobDescription">Job Description</label>
-              <textarea 
-                  id="jobDescription" 
-                  name="jobDescription" 
-                  placeholder="Provide a detailed description of the job responsibilities" 
-                  required
-              ></textarea>
-          </div>
-
-          <div class="form-group">
-              <label for="contactEmail">Contact Email</label>
-              <input 
-                  type="email" 
-                  id="contactEmail" 
-                  name="contactEmail" 
-                  placeholder="Enter contact email" 
-                  required
-              >
-          </div>
-
-          <div class="form-group">
-              <label for="contactPhone">Contact Phone (Optional)</label>
-              <input 
-                  type="tel" 
-                  id="contactPhone" 
-                  name="contactPhone" 
-                  placeholder="Enter contact phone number"
-              >
-          </div>
-
-          <button type="submit" class="submit-btn">Submit Job Posting</button>
-      </form>
+        <div class="form-section">
+          <form action="submit_job.php" method="POST" class="needs-validation" novalidate>
+              <div class="row">
+                  <div class="col-md-6">
+                      <label class="required-field">Company Name</label>
+                      <input type="text" class="form-control" name="companyName" required>
+                  </div>
+                  <div class="col-md-6">
+                      <label class="required-field">Job Title</label>
+                      <input type="text" class="form-control" name="jobTitle" required>
+                  </div>
+              </div>
+      
+              <div class="row">
+                  <div class="col-md-6">
+                      <label class="required-field">Job Type</label>
+                      <select class="form-control" name="jobType" required>
+                          <option value="">Select Job Type</option>
+                          <option value="internship">Internship</option>
+                          <option value="part-time">Part-Time</option>
+                          <option value="full-time">Full-Time</option>
+                          <option value="entry-level">Entry-Level</option>
+                      </select>
+                  </div>
+                  <div class="col-md-6">
+                      <label class="required-field">Location</label>
+                      <input type="text" class="form-control" name="location" required>
+                  </div>
+              </div>
+      
+              <div class="row">
+                  <div class="col-md-12">
+                      <label class="required-field">Qualifications</label>
+                      <textarea class="form-control" name="qualifications" rows="4" required></textarea>
+                  </div>
+              </div>
+      
+              <div class="row">
+                  <div class="col-md-12">
+                      <label class="required-field">Job Description</label>
+                      <textarea class="form-control" name="jobDescription" rows="4" required></textarea>
+                  </div>
+              </div>
+      
+              <div class="row">
+                  <div class="col-md-6">
+                      <label class="required-field">Contact Email</label>
+                      <input type="email" class="form-control" name="contactEmail" required>
+                  </div>
+                  <div class="col-md-6">
+                      <label class="required-field">Contact Phone</label>
+                      <input type="tel" class="form-control" name="contactPhone" required>
+                  </div>
+              </div>
+      
+              <div class="row mt-4">
+                  <div class="col-md-12">
+                      <button type="submit" class="submit-btn">
+                          Submit Job Posting
+                      </button>
+                  </div>
+              </div>
+          </form>
+      </div>
       </div>
     </div>
   </section>
@@ -268,9 +247,6 @@
               </a>
               <a class="" href="service.html">
                 Services
-              </a>
-              <a class="" href="why.html">
-                Why Us
               </a>
               <a class="" href="team.html">
                 Team

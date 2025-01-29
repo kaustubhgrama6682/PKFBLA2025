@@ -130,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <a class="nav-link" href="job_listings.php">View Postings</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="why.html">Apply</a>
+                <a class="nav-link" href="manage_postings.php">Manage Postings</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="logout.php"> <i class="fa fa-user" aria-hidden="true"></i> Logout</a>

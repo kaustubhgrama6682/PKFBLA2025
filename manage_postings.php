@@ -74,7 +74,57 @@ $postings = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
-
+  <style>
+    .search-container {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .job-card {
+        border: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+    }
+    
+    .job-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .badge {
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
+    
+    .badge-primary {
+        background-color: #4D47C3;
+    }
+    
+    .btn-primary {
+        background-color: #4D47C3;
+        border-color: #4D47C3;
+    }
+    
+    .btn-primary:hover {
+        background-color: #3d37b3;
+        border-color: #3d37b3;
+    }
+    
+    .btn-outline-primary {
+        color: #4D47C3;
+        border-color: #4D47C3;
+    }
+    
+    .btn-outline-primary:hover {
+        background-color: #4D47C3;
+        border-color: #4D47C3;
+    }
+    
+    .heading_container h2 span {
+        color: #4D47C3;
+    }
+</style>
 </head>
 
 <body class="sub_page">
@@ -113,7 +163,7 @@ $postings = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <a class="nav-link" href="job_listings.php">View Postings</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="why.html">Apply</a>
+                <a class="nav-link" href="add_admin.php">Add Admin</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="logout.php"> <i class="fa fa-user" aria-hidden="true"></i> Logout</a>
@@ -131,67 +181,115 @@ $postings = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <!-- end header section -->
   </div>
 
-  <!-- about section -->
-
-  <section class="about_section layout_padding">
-    <div class="container  ">
-      <div class="heading_container heading_center">
-        <h2>
-          Manage <span>Postings</span>
-        </h2>
-        <p>
-         Manage postings here
-        </p>
-      </div>
-      <div class="row">
-      <div class="admin-container">
-        <header>
-            <h1>Manage Job Postings</h1>
-            <a href="dashboard.php" class="back-btn">Back to Dashboard</a>
-        </header>
-
-        <div class="filter-nav">
-            <a href="?status=pending" class="<?php echo $status == 'pending' ? 'active' : ''; ?>">Pending</a>
-            <a href="?status=approved" class="<?php echo $status == 'approved' ? 'active' : ''; ?>">Approved</a>
-            <a href="?status=rejected" class="<?php echo $status == 'rejected' ? 'active' : ''; ?>">Rejected</a>
+  <!-- Replace the "about section" with this updated section -->
+<section class="layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center mb-5">
+            <h2>Manage <span>Postings</span></h2>
         </div>
 
-        <div class="postings-list">
+        <!-- Filter Navigation -->
+        <div class="search-container mb-4">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="d-flex justify-content-center mb-4">
+                        <a href="?status=pending" class="btn btn-<?php echo $status == 'pending' ? 'primary' : 'outline-primary'; ?> mx-2">
+                            Pending
+                        </a>
+                        <a href="?status=approved" class="btn btn-<?php echo $status == 'approved' ? 'primary' : 'outline-primary'; ?> mx-2">
+                            Approved
+                        </a>
+                        <a href="?status=rejected" class="btn btn-<?php echo $status == 'rejected' ? 'primary' : 'outline-primary'; ?> mx-2">
+                            Rejected
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Postings List -->
+        <div class="row">
             <?php if (empty($postings)): ?>
-                <p>No job postings found.</p>
+                <div class="col-12 text-center mt-5">
+                    <div class="alert alert-info">
+                        No job postings found in this category.
+                    </div>
+                </div>
             <?php else: ?>
                 <?php foreach ($postings as $posting): ?>
-                    <div class="posting-card">
-                        <h3><?php echo htmlspecialchars($posting['job_title']); ?></h3>
-                        <p><strong>Company:</strong> <?php echo htmlspecialchars($posting['company_name']); ?></p>
-                        <p><strong>Type:</strong> <?php echo htmlspecialchars($posting['job_type']); ?></p>
-                        <p><strong>Location:</strong> <?php echo htmlspecialchars($posting['location']); ?></p>
-                        
-                        <div class="posting-actions">
-                            <form method="POST">
-                                <input type="hidden" name="id" value="<?php echo $posting['id']; ?>">
-                                
-                                <?php if ($status == 'pending'): ?>
-                                    <button type="submit" name="approve" class="action-btn approve">Approve</button>
-                                    <button type="submit" name="reject" class="action-btn reject">Reject</button>
-                                <?php endif; ?>
-                                
-                                <button type="submit" name="delete" class="action-btn delete" 
-                                        onclick="return confirm('Are you sure you want to delete this posting?');">
-                                    Delete
-                                </button>
-                            </form>
+                    <div class="col-12 mb-4">
+                        <div class="card job-card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h3 class="card-title"><?php echo htmlspecialchars($posting['job_title']); ?></h3>
+                                        <h5 class="text-muted mb-3"><?php echo htmlspecialchars($posting['company_name']); ?></h5>
+                                    </div>
+                                    <div class="col-md-4 text-md-right">
+                                        <span class="badge badge-primary"><?php echo htmlspecialchars($posting['job_type']); ?></span>
+                                        <?php if (!empty($posting['location'])): ?>
+                                            <div class="mt-2">
+                                                <i class="fa fa-map-marker"></i> 
+                                                <?php echo htmlspecialchars($posting['location']); ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <?php if (!empty($posting['qualifications'])): ?>
+                                            <div class="mb-3">
+                                                <h6><i class="fa fa-graduation-cap"></i> Qualifications:</h6>
+                                                <p><?php echo htmlspecialchars($posting['qualifications']); ?></p>
+                                            </div>
+                                        <?php endif; ?>
+
+                                        <div class="mb-3">
+                                            <h6><i class="fa fa-file-text"></i> Job Description:</h6>
+                                            <p><?php echo htmlspecialchars($posting['job_description']); ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <small class="text-muted">
+                                            <i class="fa fa-calendar"></i> 
+                                            Posted: <?php echo date('M d, Y', strtotime($posting['created_at'])); ?>
+                                        </small>
+                                    </div>
+                                    <div class="col-md-6 text-md-right">
+                                        <form method="POST" class="d-inline-block">
+                                            <input type="hidden" name="id" value="<?php echo $posting['id']; ?>">
+                                            
+                                            <?php if ($status == 'pending'): ?>
+                                                <button type="submit" name="approve" class="btn btn-success btn-sm">
+                                                    <i class="fa fa-check"></i> Approve
+                                                </button>
+                                                <button type="submit" name="reject" class="btn btn-warning btn-sm">
+                                                    <i class="fa fa-times"></i> Reject
+                                                </button>
+                                            <?php endif; ?>
+                                            
+                                            <button type="submit" name="delete" 
+                                                    class="btn btn-danger btn-sm" 
+                                                    onclick="return confirm('Are you sure you want to delete this posting?');">
+                                                <i class="fa fa-trash"></i> Delete
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
     </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- end about section -->
+</section>
 
   <!-- info section -->
 

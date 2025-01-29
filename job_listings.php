@@ -77,6 +77,47 @@ if (!empty($search_query) || !empty($job_type_filter)) {
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
 
+  <style>
+    .search-container {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .job-card {
+        border: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+    }
+    
+    .job-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .badge {
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
+    
+    .badge-primary {
+        background-color: #4D47C3;
+    }
+    
+    .btn-primary {
+        background-color: #4D47C3;
+        border-color: #4D47C3;
+    }
+    
+    .btn-primary:hover {
+        background-color: #3d37b3;
+        border-color: #3d37b3;
+    }
+    
+    .heading_container h2 span {
+        color: #4D47C3;
+    }
+</style>
   
 
 </head>
@@ -117,10 +158,10 @@ if (!empty($search_query) || !empty($job_type_filter)) {
                 <a class="nav-link" href="job_listings.php">View Postings</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="why.html">Apply</a>
+                <a class="nav-link" href="student_login.php"> <i class="fa fa-user" aria-hidden="true"></i> Student Login</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="admin_login.php"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
+                <a class="nav-link" href="admin_login.php"> <i class="fa fa-user" aria-hidden="true"></i> Admin Login</a>
               </li>
               <form class="form-inline">
                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
@@ -135,79 +176,115 @@ if (!empty($search_query) || !empty($job_type_filter)) {
     <!-- end header section -->
   </div>
 
-  <!-- about section -->
+  <!-- Replace the "about section" with this new section -->
+<section class="layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center mb-5">
+            <h2>Available <span>Positions</span></h2>
+        </div>
 
-  <section class="about_section layout_padding">
-    <div class="container  ">
-      <div class="heading_container heading_center">
-        <h2>
-          About <span>Us</span>
-        </h2>
-        <p>
-          Magni quod blanditiis non minus sed aut voluptatum illum quisquam aspernatur ullam vel beatae rerum ipsum voluptatibus
-        </p>
-      </div>
-      <div class="row">
-      <div class="job-search">
-        <form method="GET">
-            <input 
-                type="text" 
-                name="search" 
-                placeholder="Search jobs..." 
-                value="<?php echo htmlspecialchars($search_query); ?>"
-                style="flex-grow: 1; padding: 10px;"
-            >
-            <select name="job_type" style="padding: 10px;">
-                <option value="">All Job Types</option>
-                <option value="internship" <?php echo $job_type_filter === 'internship' ? 'selected' : ''; ?>>Internship</option>
-                <option value="part-time" <?php echo $job_type_filter === 'part-time' ? 'selected' : ''; ?>>Part-Time</option>
-                <option value="full-time" <?php echo $job_type_filter === 'full-time' ? 'selected' : ''; ?>>Full-Time</option>
-                <option value="entry-level" <?php echo $job_type_filter === 'entry-level' ? 'selected' : ''; ?>>Entry-Level</option>
-            </select>
-            <button type="submit" style="padding: 10px;">Search</button>
-        </form>
-    </div>
-
-    <div class="job-listings">
-        <?php if (empty($filtered_postings)): ?>
-            <p>No job postings found.</p>
-        <?php else: ?>
-            <?php foreach ($filtered_postings as $posting): ?>
-                <div class="job-card">
-                    <h2><?php echo htmlspecialchars($posting['job_title']); ?></h2>
-                    <p><strong>Company:</strong> <?php echo htmlspecialchars($posting['company_name']); ?></p>
-                    <span class="job-type"><?php echo htmlspecialchars($posting['job_type']); ?></span>
-                    
-                    <?php if (!empty($posting['location'])): ?>
-                        <p><strong>Location:</strong> <?php echo htmlspecialchars($posting['location']); ?></p>
-                    <?php endif; ?>
-                    
-                    <?php if (!empty($posting['qualifications'])): ?>
-                        <details>
-                            <summary>Qualifications</summary>
-                            <p><?php echo htmlspecialchars($posting['qualifications']); ?></p>
-                        </details>
-                    <?php endif; ?>
-                    
-                    <details>
-                        <summary>Job Description</summary>
-                        <p><?php echo htmlspecialchars($posting['job_description']); ?></p>
-                    </details>
-                    
-                    <div class="job-meta">
-                        <span>Posted: <?php echo date('M d, Y', strtotime($posting['created_at'])); ?></span>
-                        <a href="mailto:<?php echo htmlspecialchars($posting['contact_email']); ?>">Contact</a>
+        <!-- Search and Filter Section -->
+        <div class="search-container mb-4">
+            <form method="GET" class="search-form">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <input 
+                            type="text" 
+                            name="search" 
+                            class="form-control" 
+                            placeholder="Search jobs..." 
+                            value="<?php echo htmlspecialchars($search_query); ?>"
+                        >
                     </div>
-                    <a href="apply.php?id=<?php echo $posting['id']; ?>" class="btn btn-primary">Apply</a>
+                    <div class="col-md-3">
+                        <select name="job_type" class="form-control">
+                            <option value="">All Job Types</option>
+                            <option value="internship" <?php echo $job_type_filter === 'internship' ? 'selected' : ''; ?>>Internship</option>
+                            <option value="part-time" <?php echo $job_type_filter === 'part-time' ? 'selected' : ''; ?>>Part-Time</option>
+                            <option value="full-time" <?php echo $job_type_filter === 'full-time' ? 'selected' : ''; ?>>Full-Time</option>
+                            <option value="entry-level" <?php echo $job_type_filter === 'entry-level' ? 'selected' : ''; ?>>Entry-Level</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary btn-block">Search</button>
+                    </div>
                 </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
-    </div>
-      </div>
-    </div>
-  </section>
+            </form>
+        </div>
 
-  <!-- end about section -->
+        <!-- Job Listings Section -->
+        <div class="row">
+            <?php if (empty($filtered_postings)): ?>
+                <div class="col-12 text-center mt-5">
+                    <div class="alert alert-info">
+                        No job postings found. Try adjusting your search criteria.
+                    </div>
+                </div>
+            <?php else: ?>
+                <?php foreach ($filtered_postings as $posting): ?>
+                    <div class="col-12 mb-4">
+                        <div class="card job-card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h3 class="card-title"><?php echo htmlspecialchars($posting['job_title']); ?></h3>
+                                        <h5 class="text-muted mb-3"><?php echo htmlspecialchars($posting['company_name']); ?></h5>
+                                    </div>
+                                    <div class="col-md-4 text-md-right">
+                                        <span class="badge badge-primary"><?php echo htmlspecialchars($posting['job_type']); ?></span>
+                                        <?php if (!empty($posting['location'])): ?>
+                                            <div class="mt-2">
+                                                <i class="fa fa-map-marker"></i> 
+                                                <?php echo htmlspecialchars($posting['location']); ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <?php if (!empty($posting['qualifications'])): ?>
+                                            <div class="mb-3">
+                                                <h6><i class="fa fa-graduation-cap"></i> Qualifications:</h6>
+                                                <p><?php echo htmlspecialchars($posting['qualifications']); ?></p>
+                                            </div>
+                                        <?php endif; ?>
+
+                                        <div class="mb-3">
+                                            <h6><i class="fa fa-file-text"></i> Job Description:</h6>
+                                            <p><?php echo htmlspecialchars($posting['job_description']); ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <small class="text-muted">
+                                            <i class="fa fa-calendar"></i> 
+                                            Posted: <?php echo date('M d, Y', strtotime($posting['created_at'])); ?>
+                                        </small>
+                                    </div>
+                                    <div class="col-md-6 text-md-right">
+                                        <a href="mailto:<?php echo htmlspecialchars($posting['contact_email']); ?>" 
+                                           class="btn btn-outline-secondary btn-sm mr-2">
+                                            <i class="fa fa-envelope"></i> Contact
+                                        </a>
+                                        <a href="apply.php?id=<?php echo $posting['id']; ?>" 
+                                           class="btn btn-primary btn-sm">
+                                            Apply Now
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+    </div>
+</section>
 
   <!-- info section -->
 
