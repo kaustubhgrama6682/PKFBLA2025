@@ -1,14 +1,9 @@
 <?php
+// At the top of your PHP file
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 // apply.php
-session_start();
 require_once 'db_connection.php';
-
-// Check if student is logged in
-if (!isset($_SESSION['student_id'])) {
-    // Redirect to login page if not logged in
-    header("Location: student_login.php");
-    exit();
-}
 
 $error = '';
 
@@ -29,43 +24,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Handle file upload for resume
         if (!isset($_FILES['resume']) || $_FILES['resume']['error'] !== UPLOAD_ERR_OK) {
-            // Get specific upload error
-            $uploadErrors = [
-                UPLOAD_ERR_OK => 'No errors',
-                UPLOAD_ERR_INI_SIZE => 'File too large (php.ini)',
-                UPLOAD_ERR_FORM_SIZE => 'File too large (HTML form)',
-                UPLOAD_ERR_PARTIAL => 'Partial upload',
-                UPLOAD_ERR_NO_FILE => 'No file uploaded',
-                UPLOAD_ERR_NO_TMP_DIR => 'Missing temporary folder',
-                UPLOAD_ERR_CANT_WRITE => 'Failed to write file to disk',
-                UPLOAD_ERR_EXTENSION => 'PHP extension stopped file upload'
-            ];
-            
-            $errorMsg = isset($uploadErrors[$_FILES['resume']['error']]) 
-                ? $uploadErrors[$_FILES['resume']['error']] 
-                : 'Unknown upload error';
-            
-            throw new Exception("Resume upload failed: " . $errorMsg);
+            throw new Exception("Resume upload failed");
         }
 
-        // Additional file validation
-        $maxFileSize = 5 * 1024 * 1024; // 5MB max
-        if ($_FILES['resume']['size'] > $maxFileSize) {
-            throw new Exception("Resume file is too large. Maximum file size is 5MB.");
-        }
-
-        // Validate file type
-        $allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-        if (!in_array($_FILES['resume']['type'], $allowedTypes)) {
-            throw new Exception("Invalid file type. Only PDF and Word documents are allowed.");
-        }
-
-        // Create uploads directory
+        // Create uploads directory if it doesn't exist
         $uploadDir = 'uploads/resumes/';
         if (!file_exists($uploadDir)) {
-            if (!mkdir($uploadDir, 0777, true)) {
-                throw new Exception("Failed to create upload directory");
-            }
+            mkdir($uploadDir, 0777, true);
         }
 
         // Generate unique filename
@@ -73,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fileName = uniqid() . '.' . $fileExt;
         $uploadPath = $uploadDir . $fileName;
 
-        // Attempt to move file
+        // Move uploaded file
         if (!move_uploaded_file($_FILES['resume']['tmp_name'], $uploadPath)) {
             throw new Exception("Failed to move uploaded resume");
         }
@@ -81,12 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Prepare and execute database insertion
         $stmt = $pdo->prepare("INSERT INTO applications (
             name, email, phone, resume, cover_letter, 
-            education, work_experience, skills, 
-            job_id, student_id
+            education, work_experience, skills, job_id
         ) VALUES (
             :name, :email, :phone, :resume, :cover_letter, 
-            :education, :work_experience, :skills, 
-            :job_id, :student_id
+            :education, :work_experience, :skills, :job_id
         )");
         
         $stmt->execute([
@@ -98,8 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'education' => $_POST['education'],
             'work_experience' => $_POST['work_experience'],
             'skills' => $_POST['skills'],
-            'job_id' => $_POST['job_id'],
-            'student_id' => $_SESSION['student_id']  // Use session student_id
+            'job_id' => $_POST['job_id']
         ]);
 
         // Redirect to success page
@@ -123,6 +85,11 @@ $job_posting = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$job_posting) {
     die("Job posting not found");
+}
+
+$uploadDir = 'uploads/resumes/';
+if (!file_exists($uploadDir)) {
+    mkdir($uploadDir, 0755, true);  // Create directory with read/write permissions
 }
 ?>
 
@@ -156,7 +123,82 @@ if (!$job_posting) {
             background: url('images/background.jpg') no-repeat center center fixed;
             background-size: cover;
         }
-        /* ... (previous styles remain the same) ... */
+        .job-card {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .form-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-control {
+            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .form-control:focus {
+            border-color: #4D47C3;
+            box-shadow: 0 0 0 0.2rem rgba(77, 71, 195, 0.25);
+        }
+        
+        .btn-primary {
+            background-color: #4D47C3;
+            border-color: #4D47C3;
+            padding: 12px 24px;
+            font-size: 1rem;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3d37b3;
+            border-color: #3d37b3;
+            transform: translateY(-2px);
+        }
+        
+        .required-field::after {
+            content: "*";
+            color: #dc3545;
+            margin-left: 4px;
+        }
+        
+        .heading_container h2 span {
+            color: #4D47C3;
+        }
+
+        .form-section h5 {
+            color: #4D47C3;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .form-section h5 i {
+            margin-right: 8px;
+        }
+
+        .job-details {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 
@@ -186,13 +228,19 @@ if (!$job_posting) {
                                 <a class="nav-link" href="index.html">Home</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="submitpostings.html">Submit Posting</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="job_listings.php">View Postings</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="student_dashboard.php">Dashboard</a>
+                                <a class="nav-link" href="review_faq.php">Reviews & FAQ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="logout.php"><i class="fa fa-sign-out"></i> Logout</a>
+                                <a class="nav-link" href="student_login.php"><i class="fa fa-user" aria-hidden="true"></i> Student Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="admin_login.php"><i class="fa fa-user" aria-hidden="true"></i> Admin Login</a>
                             </li>
                         </ul>
                     </div>
@@ -309,7 +357,8 @@ if (!$job_posting) {
         </div>
     </section>
 
-    <!-- Remaining sections (info, footer) stay the same as before -->
+    <!-- info section and footer remain the same as in the previous version -->
+    <!-- (Keeping the existing info and footer sections) -->
 
     <!-- JavaScript -->
     <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>

@@ -229,13 +229,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_question'])) {
                                 <a class="nav-link" href="index.html">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="job_listings.php">View Postings</a>
+                                <a class="nav-link" href="job_listings.php">View Postings</a> 
                             </li>
-                            <li class="nav-item">
-                <a class="nav-link" href="review_faq.php">Reviews & FAQ</a>
-              </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="student_dashboard.php">Dashboard <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="review_faq.php">Reviews & FAQ  <span class="sr-only">(current)</span></a>
+              </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="student_dashboard.php">Dashboard</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="edit_profile.php">Edit Profile</a>
@@ -439,69 +439,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_question'])) {
     </section>
     <!-- info section -->
     <section class="info_section layout_padding2">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-lg-3 info_col">
-                    <div class="info_contact">
-                        <h4>Address</h4>
-                        <div class="contact_link_box">
-                            <a href="">
-                                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                <span>Location</span>
-                            </a>
-                            <a href="">
-                                <i class="fa fa-phone" aria-hidden="true"></i>
-                                <span>Call +01 1234567890</span>
-                            </a>
-                            <a href="">
-                                <i class="fa fa-envelope" aria-hidden="true"></i>
-                                <span>demo@gmail.com</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="info_social">
-                        <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                        <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                        <a href=""><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                        <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 info_col">
-                    <div class="info_detail">
-                        <h4>Info</h4>
-                        <p>Professional job board connecting students with career opportunities.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-2 mx-auto info_col">
-                    <div class="info_link_box">
-                        <h4>Links</h4>
-                        <div class="info_links">
-                            <a href="index.html">Home</a>
-                            <a href="job_listings.php">Jobs</a>
-                            <a href="submitpostings.html">Post a Job</a>
-                            <a href="review_faq.php">Reviews</a>
-                            <a href="student_login.php">Login</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 info_col">
-                    <h4>Subscribe</h4>
-                    <form action="#">
-                        <input type="text" placeholder="Enter email" />
-                        <button type="submit">Subscribe</button>
-                    </form>
-                </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-lg-3 info_col">
+          <div class="info_contact">
+            <h4>
+              Contact Us
+            </h4>
+            <div class="contact_link_box">
+              <a href="">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span>
+                  9130 NE 180th Street
+Bothell, WA 98011-3398
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span>
+                  Call 425-408-7000
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <span>
+                  careers@nsd.org
+                </span>
+              </a>
             </div>
+          </div>
         </div>
-    </section>
-    <!-- end info section -->
-
-    <!-- footer section -->
-    <section class="footer_section">
-        <div class="container">
-            <p>&copy; <span id="displayYear"></span> All Rights Reserved</p>
+        <div class="col-md-6 col-lg-3 info_col">
+          <div class="info_detail">
+            <h4>
+              Resources
+            </h4>
+            <p>
+              Access career resources, resume templates, and interview tips to help you succeed in your job search.
+            </p>
+          </div>
         </div>
-    </section>
+        <div class="col-md-6 col-lg-2 mx-auto info_col">
+          <div class="info_link_box">
+            <h4>
+              Quick Links
+            </h4>
+            <div class="info_links">
+              <a href="index.html">Home</a>
+              <a href="job_listings.php">Job Listings</a>
+              <a href="student_login.php">Student Login</a>
+              <a href="submitpostings.html">Post a Job</a>
+              <a href="admin_login.php">Admin Portal</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
     <!-- end footer section -->
 
     <!-- JavaScript files -->

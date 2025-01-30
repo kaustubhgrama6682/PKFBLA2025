@@ -357,52 +357,19 @@ if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $upload_path)) {
                                     </div>
                                 </div>
 
-                                <!-- Academic Information -->
-                                <div class="form-section mb-4">
-                                    <h5 class="section-heading">
-                                        <i class="fa fa-graduation-cap section-icon"></i> Academic Information
-                                    </h5>
-                                    <div class="row">
-                                        <div class="col-md-4 mb-3">
-                                            <label>Degree</label>
-                                            <input type="text" class="form-control" name="degree" 
-                                                   value="<?php echo htmlspecialchars($student['degree']); ?>">
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label>Major</label>
-                                            <input type="text" class="form-control" name="major" 
-                                                   value="<?php echo htmlspecialchars($student['major']); ?>">
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label>Graduation Year</label>
-                                            <input type="number" class="form-control" name="graduation_year" 
-                                                   value="<?php echo htmlspecialchars($student['graduation_year']); ?>">
-                                        </div>
-                                    </div>
-                                </div>
+                               
 
                                 <!-- Skills and Resume -->
                                 <div class="form-section mb-4">
                                     <h5 class="section-heading">
-                                        <i class="fa fa-file-text section-icon"></i> Skills & Resume
+                                        <i class="fa fa-file-text section-icon"></i> Skills
                                     </h5>
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
                                             <label>Skills (comma-separated)</label>
                                             <textarea class="form-control" name="skills" rows="3"><?php echo htmlspecialchars($student['skills']); ?></textarea>
                                         </div>
-                                        <div class="col-md-12">
-                                            <label>Resume</label>
-                                            <div class="file-upload">
-                                                <label class="btn btn-outline-primary">
-                                                    <i class="fa fa-upload"></i> Upload Resume
-                                                    <input type="file" id="resume" name="resume">
-                                                </label>
-                                                <?php if($student['resume']): ?>
-                                                    <small class="text-muted ml-2">Current resume: <?php echo basename($student['resume']); ?></small>
-                                                <?php endif; ?>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
 
@@ -431,7 +398,12 @@ document.getElementById('profile_picture').onchange = function(e) {
     if (file) {
         const reader = new FileReader();
         reader.onload = function(e) {
-            document.querySelector('.profile-preview').src = e.target.result;
+            const img = document.querySelector('.profile-preview');
+            img.src = e.target.result;
+            console.log('File preview loaded:', e.target.result);
+        }
+        reader.onerror = function(e) {
+            console.error('File reading error:', e);
         }
         reader.readAsDataURL(file);
     }

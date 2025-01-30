@@ -230,19 +230,26 @@ $recommended_jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
 
             <div class="row">
-                <!-- Profile Section -->
-                <div class="col-md-4">
-                    <div class="dashboard-card">
-                        <div class="profile-section">
-                            <img src="<?php echo $student['profile_picture'] ?? 'images/default-profile.png'; ?>" 
-                                 class="profile-image" alt="Profile Picture">
-                            <h4><?php echo htmlspecialchars($student['name']); ?></h4>
-                            <p class="text-muted"><?php echo htmlspecialchars($student['major']); ?></p>
-                            <p>Class of <?php echo htmlspecialchars($student['graduation_year']); ?></p>
-                            <a href="edit_profile.php" class="btn btn-primary">Edit Profile</a>
-                        </div>
-                    </div>
-                </div>
+               <!-- Profile Section -->
+<div class="col-md-4">
+    <div class="dashboard-card">
+        <div class="profile-section">
+            <img src="<?php 
+                // Use default profile picture if no profile picture exists
+                $defaultProfilePic = 'images/default-profile.png';
+                $profilePic = (!empty($student['profile_picture']) && file_exists($student['profile_picture'])) 
+                    ? $student['profile_picture'] 
+                    : $defaultProfilePic;
+                echo htmlspecialchars($profilePic);
+            ?>" alt="Profile Picture" class="profile-image">
+            
+            <h4><?php echo htmlspecialchars($student['name']); ?></h4>
+            <p class="text-muted"><?php echo htmlspecialchars($student['major']); ?></p>
+            <p>Class of <?php echo htmlspecialchars($student['graduation_year']); ?></p>
+            <a href="edit_profile.php" class="btn btn-primary">Edit Profile</a>
+        </div>
+    </div>
+</div>
 
                 <!-- Application History -->
                 <div class="col-md-8">

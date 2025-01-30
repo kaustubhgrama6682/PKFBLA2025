@@ -101,6 +101,38 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
             border-radius: 15px;
             font-size: 0.8rem;
         }
+        .marquee-container {
+    width: 100%;
+    overflow: hidden;
+    background: #4D47C3;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    position: relative;
+    white-space: nowrap;
+}
+
+.marquee-track {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 10s linear infinite;
+}
+
+.marquee-text {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    display: inline-block;
+    padding: 0 40px;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
     </style>
 </head>
 
@@ -108,7 +140,7 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="hero_area">
         <!-- Include your header -->
          <!-- header section strats -->
-    <header class="header_section">
+   <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="index.html">
@@ -123,23 +155,20 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
               <li class="nav-item active">
-                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="manage_review_faq.php">Manage Reviews & FAQ  <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="submitpostings.html"> Submit Posting</a>
+                <a class="nav-link" href="manage_postings.php">Manage Postings</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="job_listings.php">View Postings</a>
+                <a class="nav-link" href="add_admin.php">Add Admin</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="manage_review_faq.php">Manage Reviews & FAQ</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="student_login.php"> <i class="fa fa-user" aria-hidden="true"></i> Student Login</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="admin_login.php"> <i class="fa fa-user" aria-hidden="true"></i> Admin Login</a>
+                <a class="nav-link" href="logout.php"> <i class="fa fa-user" aria-hidden="true"></i> Logout</a>
               </li>
               <form class="form-inline">
                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
@@ -152,7 +181,15 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
       </div>
     </header>
     <!-- end header section -->
-    </div>
+  </div>
+  <div class="marquee-container">
+            <div class="marquee-track">
+                <span class="marquee-text">Admin Mode</span>
+                <span class="marquee-text">Admin Mode</span>
+                <span class="marquee-text">Admin Mode</span>
+                <span class="marquee-text">Admin Mode</span>
+            </div>
+        </div>
 
     <section class="layout_padding">
         <div class="container">

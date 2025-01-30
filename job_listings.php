@@ -208,14 +208,14 @@ body {
                             <li class="nav-item">
                                 <a class="nav-link" href="index.html">Home</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item active">
                                 <a class="nav-link" href="job_listings.php">View Postings</a>
                             </li>
                             <li class="nav-item">
                 <a class="nav-link" href="review_faq.php">Reviews & FAQ</a>
               </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="student_dashboard.php">Dashboard <span class="sr-only">(current)</span></a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="student_dashboard.php">Dashboard </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="edit_profile.php">Edit Profile</a>
@@ -228,6 +228,8 @@ body {
                 </nav>
             </div>
         </header>
+
+        
 
 
 
@@ -255,11 +257,11 @@ body {
                             <li class="nav-item">
                                 <a class="nav-link" href="submitpostings.html">Submit Posting</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="job_listings.php">View Postings</a>
-                            </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="review_faq.php">Reviews & FAQ <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="job_listings.php">View Postings <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="review_faq.php">Reviews & FAQ</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="student_login.php"><i class="fa fa-user" aria-hidden="true"></i> Student Login</a>
