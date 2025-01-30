@@ -135,9 +135,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <a class="nav-link" href="submitpostings.html"> Submit Posting</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="job_listings.php">View Postings</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="review_faq.php">Reviews & FAQ</a>
               </li>
               <li class="nav-item">

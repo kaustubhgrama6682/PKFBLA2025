@@ -275,9 +275,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_question'])) {
                             <li class="nav-item">
                                 <a class="nav-link" href="submitpostings.html">Submit Posting</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="job_listings.php">View Postings</a>
-                            </li>
                             <li class="nav-item active">
                                 <a class="nav-link" href="review_faq.php">Reviews & FAQ <span class="sr-only">(current)</span></a>
                             </li>

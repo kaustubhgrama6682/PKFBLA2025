@@ -116,9 +116,6 @@
             <a class="nav-link" href="submitpostings.html">Submit Posting</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="job_listings.php">View Postings</a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" href="review_faq.php">Reviews & FAQ</a>
         </li>
         <li class="nav-item">
@@ -156,9 +153,6 @@
                         <div class="mt-4">
                             <a href="submitpostings.html" class="btn btn-primary mr-3">
                                 <i class="fa fa-plus"></i> Submit Another Posting
-                            </a>
-                            <a href="job_listings.php" class="btn btn-outline-primary">
-                                <i class="fa fa-list"></i> View All Postings
                             </a>
                         </div>
                     </div>
