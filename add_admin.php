@@ -91,7 +91,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
+  <style>
+    .job-card {
+        border: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+        background: #f8f9fa;
+        border-radius: 10px;
+    }
+    
+    .form-control {
+        border-radius: 8px;
+        padding: 12px;
+        border: 1px solid #e9ecef;
+    }
+    
+    .form-control:focus {
+        border-color: #4D47C3;
+        box-shadow: 0 0 0 0.2rem rgba(77, 71, 195, 0.25);
+    }
+    
+    .btn-primary {
+        background-color: #4D47C3;
+        border-color: #4D47C3;
+        padding: 12px 24px;
+    }
+    
+    .btn-primary:hover {
+        background-color: #3d37b3;
+        border-color: #3d37b3;
+    }
+    
+    .heading_container h2 span {
+        color: #4D47C3;
+    }
 
+    .alert {
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        color: #155724;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+    }
+</style>
 </head>
 
 <body class="sub_page">
@@ -150,52 +202,90 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   <!-- about section -->
 
-  <section class="about_section layout_padding">
-    <div class="container  ">
-      <div class="heading_container heading_center">
-        <h2>
-          Add <span>Admin</span>
-        </h2>
-        <p>
-          Use this page to add an administrator.
-        </p>
-      </div>
-      <div class="row">
-      <div class="admin-container">
-        <form method="POST" class="admin-form">
-            <h2>Add Admin User</h2>
-            
-            <?php if($error): ?>
-                <div class="error-message"><?php echo $error; ?></div>
-            <?php endif; ?>
-            
-            <?php if($success): ?>
-                <div class="success-message"><?php echo $success; ?></div>
-            <?php endif; ?>
-            
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
+  <section class="layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center mb-5">
+            <h2>Add <span>Administrator</span></h2>
+        </div>
+
+        <!-- Add Admin Form -->
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card job-card">
+                    <div class="card-body">
+                        <?php if($error): ?>
+                            <div class="alert alert-danger">
+                                <i class="fa fa-exclamation-circle"></i> <?php echo $error; ?>
+                            </div>
+                        <?php endif; ?>
+                        
+                        <?php if($success): ?>
+                            <div class="alert alert-success">
+                                <i class="fa fa-check-circle"></i> <?php echo $success; ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <form method="POST" class="p-3">
+                            <div class="form-group row mb-4">
+                                <label for="username" class="col-sm-3 col-form-label">
+                                    <i class="fa fa-user"></i> Username
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="text" 
+                                           class="form-control" 
+                                           id="username" 
+                                           name="username" 
+                                           required
+                                           placeholder="Enter admin username">
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-4">
+                                <label for="password" class="col-sm-3 col-form-label">
+                                    <i class="fa fa-lock"></i> Password
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="password" 
+                                           class="form-control" 
+                                           id="password" 
+                                           name="password" 
+                                           required
+                                           placeholder="Enter password">
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-4">
+                                <label for="confirm_password" class="col-sm-3 col-form-label">
+                                    <i class="fa fa-lock"></i> Confirm
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="password" 
+                                           class="form-control" 
+                                           id="confirm_password" 
+                                           name="confirm_password" 
+                                           required
+                                           placeholder="Confirm password">
+                                </div>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-sm-9 offset-sm-3">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fa fa-plus-circle"></i> Create Admin User
+                                    </button>
+                                    <a href="manage_postings.php" class="btn btn-outline-secondary ml-2">
+                                        <i class="fa fa-arrow-left"></i> Back to Postings
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="confirm_password">Confirm Password</label>
-                <input type="password" id="confirm_password" name="confirm_password" required>
-            </div>
-            
-            <button type="submit" class="submit-btn">Create Admin User</button>
-            
-            <a href="dashboard.php" class="back-link">Back to Dashboard</a>
-        </form>
+        </div>
     </div>
-      </div>
-    </div>
-  </section>
+</section>
+
 
   <!-- end about section -->
 

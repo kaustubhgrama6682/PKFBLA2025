@@ -148,14 +148,14 @@ if (!empty($search_query) || !empty($job_type_filter)) {
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ">
-              <li class="nav-item active">
-                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="submitpostings.html"> Submit Posting</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="job_listings.php">View Postings</a>
+              <li class="nav-item active">
+                <a class="nav-link" href="job_listings.php">View Postings <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="student_login.php"> <i class="fa fa-user" aria-hidden="true"></i> Student Login</a>
