@@ -26,7 +26,7 @@ $success = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $phone = $_POST['phone'];
-    $degree = $_POST['degree'];
+    $school = $_POST['school'];
     $major = $_POST['major'];
     $graduation_year = $_POST['graduation_year'];
     $skills = $_POST['skills'];
@@ -80,11 +80,11 @@ if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $upload_path)) {
     $sql = "UPDATE students SET 
             name = ?, 
             phone = ?, 
-            degree = ?, 
+            school = ?, 
             major = ?, 
             graduation_year = ?, 
             skills = ?";
-    $params = [$name, $phone, $degree, $major, $graduation_year, $skills];
+    $params = [$name, $phone, $school, $major, $graduation_year, $skills];
 
     if (isset($profile_picture)) {
         $sql .= ", profile_picture = ?";
@@ -357,7 +357,29 @@ if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $upload_path)) {
                                     </div>
                                 </div>
 
-                               
+                                <!-- Academic Information -->
+                                <div class="form-section mb-4">
+                                    <h5 class="section-heading">
+                                        <i class="fa fa-graduation-cap section-icon"></i> Academic Information
+                                    </h5>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label>School</label>
+                                            <input type="text" class="form-control" name="school" 
+                                                   value="<?php echo htmlspecialchars($student['school']); ?>">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Prospective Major</label>
+                                            <input type="text" class="form-control" name="major" 
+                                                   value="<?php echo htmlspecialchars($student['major']); ?>">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Graduation Year</label>
+                                            <input type="number" class="form-control" name="graduation_year" 
+                                                   value="<?php echo htmlspecialchars($student['graduation_year']); ?>">
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <!-- Skills and Resume -->
                                 <div class="form-section mb-4">
