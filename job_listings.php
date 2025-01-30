@@ -117,6 +117,34 @@ if (!empty($search_query) || !empty($job_type_filter)) {
     .heading_container h2 span {
         color: #4D47C3;
     }
+
+    .bg_img_box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Changed from 'cover' to 'contain' */
+  object-position: center;
+}
+
+.layout_padding {
+    background-image: url('images/background.jpg');
+    background-size: contain no-repeat center center fixed;  /* This will show the full image */
+    background-repeat: no-repeat;
+    background-position: center top;
+    min-height: 100vh;        /* This ensures minimum height of viewport */
+    margin-bottom: 0;         /* Remove any bottom margin */
+    padding-bottom: 50px;     /* Add some padding at bottom */.
+}
+
+/* Update card styles to ensure content is readable */
+.search-container, .job-card {
+    background: rgba(255, 255, 255, 0.95);  /* Slight transparency */
+}
+
+body {
+  background: url('path-to-your-image.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
 </style>
   
 
@@ -124,14 +152,10 @@ if (!empty($search_query) || !empty($job_type_filter)) {
 
 <body class="sub_page">
 
+ 
+
+
   <div class="hero_area">
-
-    <div class="hero_bg_box">
-      <div class="bg_img_box">
-        <img src="images/hero-bg.png" alt="">
-      </div>
-    </div>
-
     <!-- header section strats -->
     <header class="header_section">
       <div class="container-fluid">
@@ -177,13 +201,13 @@ if (!empty($search_query) || !empty($job_type_filter)) {
       </div>
     </header>
     <!-- end header section -->
-  </div>
+</div>
 
   <!-- Replace the "about section" with this new section -->
 <section class="layout_padding">
     <div class="container">
         <div class="heading_container heading_center mb-5">
-            <h2>Available <span>Positions</span></h2>
+            <h2 style = "color: white">Available Positions</h2>
         </div>
 
         <!-- Search and Filter Section -->
@@ -287,7 +311,7 @@ if (!empty($search_query) || !empty($job_type_filter)) {
             <?php endif; ?>
         </div>
     </div>
-</section>
+
 
   <!-- info section -->
 
@@ -383,7 +407,7 @@ if (!empty($search_query) || !empty($job_type_filter)) {
       </div>
     </div>
   </section>
-
+                                        </section>
   <!-- end info section -->
 
   <!-- footer section -->
