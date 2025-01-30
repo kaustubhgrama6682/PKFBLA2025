@@ -196,7 +196,7 @@ body {
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg custom_nav-container">
                     <a class="navbar-brand" href="index.html">
-                        <span>Job Listings</span>
+                        <span>Cougar Connect</span>
                     </a>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
@@ -242,7 +242,7 @@ body {
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg custom_nav-container">
                     <a class="navbar-brand" href="index.html">
-                        <span>Job Listings</span>
+                        <span>Cougar Connect</span>
                     </a>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
@@ -329,7 +329,7 @@ body {
             </form>
         </div>
 
-        <!-- Job Listings Section -->
+        <!-- Cougar Connect Section -->
         <div class="row">
             <?php if (empty($filtered_postings)): ?>
                 <div class="col-12 text-center mt-5">
@@ -452,7 +452,7 @@ Bothell, WA 98011-3398
             </h4>
             <div class="info_links">
               <a href="index.html">Home</a>
-              <a href="job_listings.php">Job Listings</a>
+              <a href="job_listings.php">Cougar Connect</a>
               <a href="student_login.php">Student Login</a>
               <a href="submitpostings.html">Post a Job</a>
               <a href="admin_login.php">Admin Portal</a>

@@ -56,11 +56,7 @@ body {
         margin-bottom: 20px;
     }
     
-    .form-control {
-        border-radius: 8px;
-        padding: 12px;
-        border: 1px solid #e9ecef;
-    }
+   
     
     .form-control:focus {
         border-color: #4D47C3;
@@ -100,6 +96,39 @@ body {
     .form-section h5 i {
         margin-right: 8px;
     }
+
+
+.form-control {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: initial;
+    padding-right: 2rem; /* Increased padding for dropdown arrow */
+}
+
+.form-control.job-type-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1.5em;
+}
+
+.form-control.job-type-select option {
+    white-space: normal;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    padding: 0.5rem;
+}
+
+.form-control.job-type-select:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(77, 71, 195, 0.25);
+}
+</style>
+</style>
+
 </style>
 </head>
 
@@ -118,7 +147,7 @@ body {
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="index.html">
             <span>
-              Job Listings
+              Cougar Connect
             </span>
           </a>
 
@@ -196,15 +225,15 @@ body {
                                         <input type="text" class="form-control" name="jobTitle" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="required-field">Job Type</label>
-                                        <select class="form-control" name="jobType" required>
-                                            <option value="">Select Job Type</option>
-                                            <option value="Internship">Internship</option>
-                                            <option value="Part-Time">Part-Time</option>
-                                            <option value="Full-Time">Full-Time</option>
-                                            <option value="Entry-Level">Entry-Level</option>
-                                        </select>
-                                    </div>
+                                      <label class="required-field">Job Type</label>
+                                      <select class="form-control job-type-select" name="jobType" required>
+                                          <option value="">Select Job Type</option>
+                                          <option value="Internship">Internship</option>
+                                          <option value="Part-Time">Part-Time</option>
+                                          <option value="Full-Time">Full-Time</option>
+                                          <option value="Entry-Level">Entry-Level</option>
+                                      </select>
+                                  </div>
                                 </div>
 
                                 <div class="row">
