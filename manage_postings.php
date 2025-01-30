@@ -124,6 +124,11 @@ $postings = $stmt->fetchAll(PDO::FETCH_ASSOC);
     .heading_container h2 span {
         color: #4D47C3;
     }
+
+    body {
+  background: url('images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
 </style>
 </head>
 
@@ -188,7 +193,7 @@ $postings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <section class="layout_padding">
     <div class="container">
         <div class="heading_container heading_center mb-5">
-            <h2>Manage <span>Postings</span></h2>
+            <h2 style="color:white">Manage Postings</h2>
         </div>
 
         <!-- Filter Navigation -->

@@ -65,6 +65,10 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link href="css/style.css" rel="stylesheet" />
 
     <style>
+        body {
+  background: url('images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
         .question-card, .review-card {
             border: none;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -84,7 +88,7 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         
         .nav-pills .nav-link {
-            color: #4D47C3;
+            color: white;
         }
         
         .btn-primary {
@@ -153,7 +157,7 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <section class="layout_padding">
         <div class="container">
             <div class="heading_container heading_center mb-5">
-                <h2>Manage Reviews & <span>FAQ</span></h2>
+                <h2 style = "color:white">Manage Reviews & FAQ</h2>
             </div>
 
             <!-- Navigation tabs -->

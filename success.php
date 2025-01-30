@@ -36,7 +36,51 @@
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
+  <style>
+    .job-card {
+        border: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+        background: #f8f9fa;
+        border-radius: 10px;
+    }
+    
+    .btn-primary {
+        background-color: #4D47C3;
+        border-color: #4D47C3;
+        padding: 12px 24px;
+    }
+    
+    .btn-primary:hover {
+        background-color: #3d37b3;
+        border-color: #3d37b3;
+        transform: translateY(-2px);
+    }
+    
+    .btn-outline-primary {
+        color: #4D47C3;
+        border-color: #4D47C3;
+        padding: 12px 24px;
+    }
+    
+    .btn-outline-primary:hover {
+        background-color: #4D47C3;
+        border-color: #4D47C3;
+        transform: translateY(-2px);
+    }
+    
+    .heading_container h2 span {
+        color: #4D47C3;
+    }
 
+    .text-success {
+        color: #28a745;
+    }
+    body {
+  background: url('images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+</style>
 </head>
 
 <body class="sub_page">
@@ -64,49 +108,65 @@
           </button>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav  ">
-              <li class="nav-item active">
-                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="submitpostings.html"> Submit Posting</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="job_listings.php">View Postings</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="why.html">Apply</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="admin_login.php"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
-              </li>
-              <form class="form-inline">
-                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-              </form>
-            </ul>
-          </div>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="submitpostings.html">Submit Posting</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="job_listings.php">View Postings</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="review_faq.php">Reviews & FAQ</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="student_login.php"> <i class="fa fa-user" aria-hidden="true"></i> Student Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="admin_login.php"> <i class="fa fa-user" aria-hidden="true"></i> Admin Login</a>
+        </li>
+    </ul>
+</div>
         </nav>
       </div>
     </header>
     <!-- end header section -->
   </div>
 
-  <!-- about section -->
+  <section class="layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center mb-5">
+            <h2 style = "color:white" >Submission Successful</h2>
+        </div>
 
-  <section class="about_section layout_padding">
-    <div class="container  ">
-      
-      <div class="row">
-      <div class="container">
-        <h1>Job Posting Submitted Successfully!</h1>
-        <p>Your job posting has been received and is pending review by our guidance department.</p>
-        <a href="index.html" class="submit-btn">Submit Another Posting</a>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card job-card">
+                    <div class="card-body text-center p-5">
+                        <div class="mb-4">
+                            <i class="fa fa-check-circle text-success" style="font-size: 4rem;"></i>
+                        </div>
+                        
+                        <h3 class="mb-4">Thank You!</h3>
+                        <p class="mb-4">Your job posting has been received and is pending review by our guidance department. 
+                            We will process your submission as soon as possible.</p>
+                        
+                        <div class="mt-4">
+                            <a href="submitpostings.html" class="btn btn-primary mr-3">
+                                <i class="fa fa-plus"></i> Submit Another Posting
+                            </a>
+                            <a href="job_listings.php" class="btn btn-outline-primary">
+                                <i class="fa fa-list"></i> View All Postings
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-      </div>
-    </div>
-  </section>
+</section>
 
   <!-- end about section -->
 

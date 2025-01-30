@@ -67,6 +67,10 @@ $recommended_jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link href="css/responsive.css" rel="stylesheet" />
 
     <style>
+        body {
+  background: url('images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
         .dashboard-card {
             background: #f8f9fa;
             border-radius: 10px;
@@ -181,7 +185,7 @@ $recommended_jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <section class="layout_padding">
         <div class="container">
             <div class="heading_container heading_center mb-5">
-                <h2>Welcome, <span><?php echo htmlspecialchars($student['name']); ?></span></h2>
+                <h2 style = "color: white">Welcome, <?php echo htmlspecialchars($student['name']); ?></h2>
             </div>
 
             <div class="row">

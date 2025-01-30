@@ -212,6 +212,11 @@ if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $upload_path)) {
             cursor: pointer;
             display: block;
         }
+
+        body {
+  background: url('images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
     </style>
 </head>
 
@@ -261,7 +266,7 @@ if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $upload_path)) {
     <section class="layout_padding">
         <div class="container">
             <div class="heading_container heading_center mb-5">
-                <h2>Edit <span>Profile</span></h2>
+                <h2 style = "color: white">Edit Profile</h2>
             </div>
 
             <div class="row justify-content-center">

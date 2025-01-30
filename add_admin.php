@@ -143,6 +143,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         border-color: #f5c6cb;
         color: #721c24;
     }
+
+    body {
+  background: url('images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
 </style>
 </head>
 
@@ -205,7 +210,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <section class="layout_padding">
     <div class="container">
         <div class="heading_container heading_center mb-5">
-            <h2>Add <span>Administrator</span></h2>
+            <h2 style = "color:white">Add Administrator</h2>
         </div>
 
         <!-- Add Admin Form -->

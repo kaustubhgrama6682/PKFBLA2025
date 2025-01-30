@@ -101,6 +101,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             background-color: #3d37b3;
             border-color: #3d37b3;
         }
+
+        body {
+  background: url('images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
     </style>
 </head>
 
@@ -158,7 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <section class="layout_padding">
         <div class="container">
             <div class="heading_container heading_center mb-5">
-                <h2>Admin <span>Login</span></h2>
+                <h2 style = "color: white" >Admin Login</h2>
             </div>
 
             <div class="row justify-content-center">
@@ -186,6 +191,76 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+    <!-- info section -->
+    <section class="info_section layout_padding2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-lg-3 info_col">
+          <div class="info_contact">
+            <h4>
+              Contact Us
+            </h4>
+            <div class="contact_link_box">
+              <a href="">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span>
+                  9130 NE 180th Street
+Bothell, WA 98011-3398
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span>
+                  Call 425-408-7000
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <span>
+                  careers@nsd.org
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 info_col">
+          <div class="info_detail">
+            <h4>
+              Resources
+            </h4>
+            <p>
+              Access career resources, resume templates, and interview tips to help you succeed in your job search.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-2 mx-auto info_col">
+          <div class="info_link_box">
+            <h4>
+              Quick Links
+            </h4>
+            <div class="info_links">
+              <a href="index.html">Home</a>
+              <a href="job_listings.php">Job Listings</a>
+              <a href="student_login.php">Student Login</a>
+              <a href="submitpostings.html">Post a Job</a>
+              <a href="admin_login.php">Admin Portal</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+    <!-- footer section -->
+    <section class="footer_section">
+        <div class="container">
+            <p>
+                &copy; <span id="displayYear"></span> All Rights Reserved By
+                <a href="https://html.design/">Free Html Templates</a>
+            </p>
         </div>
     </section>
 

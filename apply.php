@@ -62,6 +62,10 @@ $job_posting = $stmt->fetch(PDO::FETCH_ASSOC);
     <link href="css/responsive.css" rel="stylesheet" />
 
     <style>
+        body {
+  background: url('images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
         .job-card {
             border: none;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -183,8 +187,8 @@ $job_posting = $stmt->fetch(PDO::FETCH_ASSOC);
     <section class="layout_padding">
         <div class="container">
             <div class="heading_container heading_center mb-5">
-                <h2>Apply for <span>Position</span></h2>
-                <p>You are applying for: <?php echo htmlspecialchars($job_posting['job_title']); ?> at <?php echo htmlspecialchars($job_posting['company_name']); ?></p>
+                <h2 style = "color:white" >Apply for Position</h2>
+                <p style = "color:white">You are applying for: <?php echo htmlspecialchars($job_posting['job_title']); ?> at <?php echo htmlspecialchars($job_posting['company_name']); ?></p>
             </div>
 
             <!-- Job Details Summary -->
