@@ -128,6 +128,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <li class="nav-item">
                 <a class="nav-link" href="job_listings.php">View Postings</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="review_faq.php">Reviews & FAQ</a>
+              </li>
               <li class="nav-item active">
                 <a class="nav-link" href="student_login.php"> <i class="fa fa-user" aria-hidden="true"></i> Student Login <span class="sr-only">(current)</span></a>
               </li>

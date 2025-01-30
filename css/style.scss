@@ -34,7 +34,7 @@ $textCol: #1f1f1f;
 body {
   @include main-font;
   color: #0c0c0c;
-  background-color: #ffffff;
+  background-image: url('/images/background.jpg');
   overflow-x: hidden;
 }
 

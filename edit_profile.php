@@ -239,6 +239,9 @@ if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $upload_path)) {
                                 <a class="nav-link" href="job_listings.php">View Postings</a>
                             </li>
                             <li class="nav-item">
+                <a class="nav-link" href="review_faq.php">Reviews & FAQ</a>
+              </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="student_dashboard.php">Dashboard</a>
                             </li>
                             <li class="nav-item active">

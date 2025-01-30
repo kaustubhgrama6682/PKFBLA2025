@@ -129,6 +129,9 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <a class="nav-link" href="job_listings.php">View Postings</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="manage_review_faq.php">Manage Reviews & FAQ</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="student_login.php"> <i class="fa fa-user" aria-hidden="true"></i> Student Login</a>
               </li>
               <li class="nav-item">

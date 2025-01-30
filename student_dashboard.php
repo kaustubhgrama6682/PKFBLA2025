@@ -157,6 +157,9 @@ $recommended_jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <li class="nav-item">
                                 <a class="nav-link" href="job_listings.php">View Postings</a>
                             </li>
+                            <li class="nav-item">
+                <a class="nav-link" href="review_faq.php">Reviews & FAQ</a>
+              </li>
                             <li class="nav-item active">
                                 <a class="nav-link" href="student_dashboard.php">Dashboard <span class="sr-only">(current)</span></a>
                             </li>

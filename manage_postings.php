@@ -163,6 +163,9 @@ $postings = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <a class="nav-link" href="job_listings.php">View Postings</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="manage_review_faq.php">Manage Reviews & FAQ</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="add_admin.php">Add Admin</a>
               </li>
               <li class="nav-item">
