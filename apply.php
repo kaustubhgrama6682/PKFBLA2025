@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
 
         // Redirect to success page
-        header("Location: success.php");
+        header("Location: success_apply.php");
         exit;
 
     } catch (Exception $e) {
@@ -136,7 +136,7 @@ if (!$job_posting) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="shortcut icon" href="images/favicon.png" type="">
 
-    <title>Apply for Position</title>
+    <title>Apply for <?php echo htmlspecialchars($job_posting['job_title']); ?></title>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -156,7 +156,14 @@ if (!$job_posting) {
             background: url('images/background.jpg') no-repeat center center fixed;
             background-size: cover;
         }
-        /* ... (previous styles remain the same) ... */
+        
+        .job-details {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
     </style>
 </head>
 
@@ -205,8 +212,7 @@ if (!$job_posting) {
     <section class="layout_padding">
         <div class="container">
             <div class="heading_container heading_center mb-5">
-                <h2 style="color:white">Apply for Position</h2>
-                <p style="color:white">You are applying for: <?php echo htmlspecialchars($job_posting['job_title']); ?> at <?php echo htmlspecialchars($job_posting['company_name']); ?></p>
+                <h2 style="color:white">Apply for <?php echo htmlspecialchars($job_posting['job_title']); ?></h2>
             </div>
 
             <!-- Error Handling -->

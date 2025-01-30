@@ -32,35 +32,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $skills = $_POST['skills'];
 
     // Handle profile picture upload
-    // Update the profile picture upload section
-if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === 0) {
-    $allowed = ['jpg', 'jpeg', 'png'];
-    $filename = $_FILES['profile_picture']['name'];
-    $filetype = pathinfo($filename, PATHINFO_EXTENSION);
-    
-    if (in_array(strtolower($filetype), $allowed)) {
-        $newname = 'profile_' . $_SESSION['student_id'] . '.' . $filetype;
-        $upload_path = 'uploads/profiles/' . $newname;
+    $newProfilePicture = null;
+    if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === 0) {
+        $allowed = ['jpg', 'jpeg', 'png'];
+        $filename = $_FILES['profile_picture']['name'];
+        $filetype = pathinfo($filename, PATHINFO_EXTENSION);
         
-        if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $upload_path)) {
-            $profile_picture = $upload_path;
-            // Add debug statement
-            error_log("Profile picture uploaded successfully to: " . $upload_path);
+        if (in_array(strtolower($filetype), $allowed)) {
+            $newname = 'profile_' . $_SESSION['student_id'] . '.' . $filetype;
+            $upload_path = 'uploads/profiles/' . $newname;
+            
+            if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $upload_path)) {
+                $newProfilePicture = $upload_path;
+                chmod($upload_path, 0644); // Make file readable
+                error_log("Profile picture uploaded successfully to: " . $upload_path);
+            } else {
+                $error = "Failed to move uploaded file";
+                error_log("Failed to move uploaded file to: " . $upload_path);
+            }
         } else {
-            $error = "Failed to move uploaded file";
-            error_log("Failed to move uploaded file to: " . $upload_path);
+            $error = "Invalid file type. Allowed types: " . implode(', ', $allowed);
         }
-    } else {
-        $error = "Invalid file type. Allowed types: " . implode(', ', $allowed);
     }
-}
-// After successful file upload
-if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $upload_path)) {
-    chmod($upload_path, 0644); // Make file readable
-    $profile_picture = $upload_path;
-}
 
     // Handle resume upload
+    $newResume = null;
     if (isset($_FILES['resume']) && $_FILES['resume']['error'] === 0) {
         $allowed = ['pdf', 'doc', 'docx'];
         $filename = $_FILES['resume']['name'];
@@ -71,7 +67,7 @@ if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $upload_path)) {
             $upload_path = 'uploads/resumes/' . $newname;
             
             if (move_uploaded_file($_FILES['resume']['tmp_name'], $upload_path)) {
-                $resume = $upload_path;
+                $newResume = $upload_path;
             }
         }
     }
@@ -86,13 +82,13 @@ if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $upload_path)) {
             skills = ?";
     $params = [$name, $phone, $school, $major, $graduation_year, $skills];
 
-    if (isset($profile_picture)) {
+    if ($newProfilePicture !== null) {
         $sql .= ", profile_picture = ?";
-        $params[] = $profile_picture;
+        $params[] = $newProfilePicture;
     }
-    if (isset($resume)) {
+    if ($newResume !== null) {
         $sql .= ", resume = ?";
-        $params[] = $resume;
+        $params[] = $newResume;
     }
 
     $sql .= " WHERE id = ?";
@@ -100,6 +96,8 @@ if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $upload_path)) {
 
     $stmt = $pdo->prepare($sql);
     if ($stmt->execute($params)) {
+        // Update the $student array with the new profile picture path
+        $student['profile_picture'] = $newProfilePicture ?? $student['profile_picture'];
         $success = 'Profile updated successfully';
     } else {
         $error = 'Failed to update profile';
@@ -214,42 +212,42 @@ if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $upload_path)) {
         }
 
         body {
-  background: url('images/background.jpg') no-repeat center center fixed;
-  background-size: cover;
-}
+            background: url('images/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
 
-.marquee-container {
-    width: 100%;
-    overflow: hidden;
-    background: #4D47C3;
-    padding: 10px 0;
-    margin-bottom: 20px;
-    position: relative;
-    white-space: nowrap;
-}
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            background: #4D47C3;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            position: relative;
+            white-space: nowrap;
+        }
 
-.marquee-track {
-    display: inline-block;
-    white-space: nowrap;
-    animation: marquee 10s linear infinite;
-}
+        .marquee-track {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 10s linear infinite;
+        }
 
-.marquee-text {
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    display: inline-block;
-    padding: 0 40px;
-}
+        .marquee-text {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            display: inline-block;
+            padding: 0 40px;
+        }
 
-@keyframes marquee {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(100%);
-    }
-}
+        @keyframes marquee {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
     </style>
 </head>
 
@@ -277,8 +275,8 @@ if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $upload_path)) {
                                 <a class="nav-link" href="job_listings.php">View Postings</a>
                             </li>
                             <li class="nav-item">
-                <a class="nav-link" href="review_faq.php">Reviews & FAQ</a>
-              </li>
+                                <a class="nav-link" href="review_faq.php">Reviews & FAQ</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="student_dashboard.php">Dashboard</a>
                             </li>
@@ -296,17 +294,17 @@ if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $upload_path)) {
         <!-- end header section -->
     </div>
     <div class="marquee-container">
-            <div class="marquee-track">
-                <span class="marquee-text">Student Mode</span>
-                <span class="marquee-text">Student Mode</span>
-                <span class="marquee-text">Student Mode</span>
-                <span class="marquee-text">Student Mode</span>
-            </div>
+        <div class="marquee-track">
+            <span class="marquee-text">Student Mode</span>
+            <span class="marquee-text">Student Mode</span>
+            <span class="marquee-text">Student Mode</span>
+            <span class="marquee-text">Student Mode</span>
         </div>
+    </div>
     <section class="layout_padding">
         <div class="container">
             <div class="heading_container heading_center mb-5">
-                <h2 style = "color: white">Edit Profile</h2>
+                <h2 style="color:white">Edit Profile</h2>
             </div>
 
             <div class="row justify-content-center">
@@ -327,13 +325,18 @@ if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $upload_path)) {
                             <form method="POST" enctype="multipart/form-data">
                                 <!-- Profile Picture Section -->
                                 <div class="form-section text-center mb-4">
+                                    <img src="<?php 
+                                        $defaultProfilePic = 'images/default-profile.png';
+                                        $profilePic = (!empty($student['profile_picture']) && file_exists($student['profile_picture'])) 
+                                            ? $student['profile_picture'] 
+                                            : $defaultProfilePic;
+                                        echo htmlspecialchars($profilePic); 
+                                    ?>" class="profile-preview" alt="Profile Picture">
                                     
-                                <img src="<?php echo file_exists($student['profile_picture']) ? $student['profile_picture'] : 'images/default-profile.png'; ?>" 
-                                class="profile-preview" alt="Profile Picture">
-                                    <div class="file-upload">
+                                    <div class="file-upload mt-3">
                                         <label class="btn btn-outline-primary">
                                             <i class="fa fa-camera"></i> Change Profile Picture
-                                            <input type="file" id="profile_picture" name="profile_picture">
+                                            <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
                                         </label>
                                     </div>
                                 </div>
@@ -380,6 +383,7 @@ if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $upload_path)) {
                                         </div>
                                     </div>
                                 </div>
+
 
                                 <!-- Skills and Resume -->
                                 <div class="form-section mb-4">
