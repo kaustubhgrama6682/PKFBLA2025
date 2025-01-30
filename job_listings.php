@@ -1,4 +1,5 @@
 <?php
+session_start();
 // job_listings.php
 require_once 'db_connection.php';
 
@@ -144,6 +145,38 @@ body {
   background: url('images/background.jpg') no-repeat center center fixed;
   background-size: cover;
 }
+.marquee-container {
+    width: 100%;
+    overflow: hidden;
+    background: #4D47C3;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    position: relative;
+    white-space: nowrap;
+}
+
+.marquee-track {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 10s linear infinite;
+}
+
+.marquee-text {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    display: inline-block;
+    padding: 0 40px;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
 
 </style>
   
@@ -156,53 +189,108 @@ body {
 
 
   <div class="hero_area">
-    <!-- header section strats -->
-    <header class="header_section">
-      <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
-            <span>
-              Job Listings
-            </span>
-          </a>
+     <!-- header section starts -->
 
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class=""> </span>
-          </button>
+     <?php if (isset($_SESSION['student_id'])): ?>
+            <header class="header_section">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg custom_nav-container">
+                    <a class="navbar-brand" href="index.html">
+                        <span>Job Listings</span>
+                    </a>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav  ">
-              <li class="nav-item">
-                <a class="nav-link" href="index.html">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="submitpostings.html"> Submit Posting</a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="job_listings.php">View Postings <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+                        <span class=""></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="job_listings.php">View Postings</a>
+                            </li>
+                            <li class="nav-item">
                 <a class="nav-link" href="review_faq.php">Reviews & FAQ</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="student_login.php"> <i class="fa fa-user" aria-hidden="true"></i> Student Login</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="admin_login.php"> <i class="fa fa-user" aria-hidden="true"></i> Admin Login</a>
-              </li>
-              <form class="form-inline">
-                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-              </form>
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </header>
-    <!-- end header section -->
-</div>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="student_dashboard.php">Dashboard <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="edit_profile.php">Edit Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="student_logout.php">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
 
+
+
+
+
+
+
+        <?php else: ?>    
+        <header class="header_section">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg custom_nav-container">
+                    <a class="navbar-brand" href="index.html">
+                        <span>Job Listings</span>
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+                        <span class=""></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="submitpostings.html">Submit Posting</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="job_listings.php">View Postings</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="review_faq.php">Reviews & FAQ <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="student_login.php"><i class="fa fa-user" aria-hidden="true"></i> Student Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="admin_login.php"><i class="fa fa-user" aria-hidden="true"></i> Admin Login</a>
+                            </li>
+                            <form class="form-inline">
+                                <button class="btn my-2 my-sm-0 nav_search-btn" type="submit">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- end header section -->
+         <?php endif; ?>
+</div>
+<?php if (isset($_SESSION['student_id'])): ?>
+        <div class="marquee-container">
+            <div class="marquee-track">
+                <span class="marquee-text">Student Mode</span>
+                <span class="marquee-text">Student Mode</span>
+                <span class="marquee-text">Student Mode</span>
+                <span class="marquee-text">Student Mode</span>
+            </div>
+        </div>
+
+    <?php endif; ?>
   <!-- Replace the "about section" with this new section -->
 <section class="layout_padding">
     <div class="container">

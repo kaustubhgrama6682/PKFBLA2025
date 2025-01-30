@@ -130,6 +130,38 @@ $recommended_jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
         .recommended-job-card:hover {
             transform: translateY(-5px);
         }
+        .marquee-container {
+    width: 100%;
+    overflow: hidden;
+    background: #4D47C3;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    position: relative;
+    white-space: nowrap;
+}
+
+.marquee-track {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 10s linear infinite;
+}
+
+.marquee-text {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    display: inline-block;
+    padding: 0 40px;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
     </style>
 </head>
 
@@ -171,7 +203,7 @@ $recommended_jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <a class="nav-link" href="edit_profile.php">Edit Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="logout.php">Logout</a>
+                                <a class="nav-link" href="student_logout.php">Logout</a>
                             </li>
                         </ul>
                     </div>
@@ -181,6 +213,15 @@ $recommended_jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <!-- end header section -->
     </div>
 
+     <!-- Marquee section -->
+     <div class="marquee-container">
+  <div class="marquee-track">
+    <span class="marquee-text">Student Mode</span>
+    <span class="marquee-text">Student Mode</span>
+    <span class="marquee-text">Student Mode</span>
+    <span class="marquee-text">Student Mode</span>
+  </div>
+</div>
     <!-- Dashboard section -->
     <section class="layout_padding">
         <div class="container">

@@ -165,6 +165,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_question'])) {
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
+
+        .marquee-container {
+    width: 100%;
+    overflow: hidden;
+    background: #4D47C3;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    position: relative;
+    white-space: nowrap;
+}
+
+.marquee-track {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 10s linear infinite;
+}
+
+.marquee-text {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    display: inline-block;
+    padding: 0 40px;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
     </style>
 </head>
 
@@ -177,6 +210,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_question'])) {
         </div>
 
         <!-- header section starts -->
+
+        <?php if (isset($_SESSION['student_id'])): ?>
+            <header class="header_section">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg custom_nav-container">
+                    <a class="navbar-brand" href="index.html">
+                        <span>Job Listings</span>
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+                        <span class=""></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="job_listings.php">View Postings</a>
+                            </li>
+                            <li class="nav-item">
+                <a class="nav-link" href="review_faq.php">Reviews & FAQ</a>
+              </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="student_dashboard.php">Dashboard <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="edit_profile.php">Edit Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="student_logout.php">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+
+
+
+
+
+
+        <?php else: ?>    
         <header class="header_section">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg custom_nav-container">
@@ -219,7 +298,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_question'])) {
             </div>
         </header>
         <!-- end header section -->
+         <?php endif; ?>
     </div>
+
+    <?php if (isset($_SESSION['student_id'])): ?>
+        <div class="marquee-container">
+            <div class="marquee-track">
+                <span class="marquee-text">Student Mode</span>
+                <span class="marquee-text">Student Mode</span>
+                <span class="marquee-text">Student Mode</span>
+                <span class="marquee-text">Student Mode</span>
+            </div>
+        </div>
+
+    <?php endif; ?>
+
+
     <!-- Main Content Section -->
     <section class="layout_padding">
         <div class="container">
@@ -343,66 +437,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_question'])) {
             </div>
         </div>
     </section>
-     <!-- info section -->
-     <section class="info_section layout_padding2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-lg-3 info_col">
-          <div class="info_contact">
-            <h4>
-              Contact Us
-            </h4>
-            <div class="contact_link_box">
-              <a href="">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span>
-                  9130 NE 180th Street
-Bothell, WA 98011-3398
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>
-                  Call 425-408-7000
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                <span>
-                  careers@nsd.org
-                </span>
-              </a>
+    <!-- info section -->
+    <section class="info_section layout_padding2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-3 info_col">
+                    <div class="info_contact">
+                        <h4>Address</h4>
+                        <div class="contact_link_box">
+                            <a href="">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                <span>Location</span>
+                            </a>
+                            <a href="">
+                                <i class="fa fa-phone" aria-hidden="true"></i>
+                                <span>Call +01 1234567890</span>
+                            </a>
+                            <a href="">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                <span>demo@gmail.com</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="info_social">
+                        <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                        <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                        <a href=""><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 info_col">
+                    <div class="info_detail">
+                        <h4>Info</h4>
+                        <p>Professional job board connecting students with career opportunities.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-2 mx-auto info_col">
+                    <div class="info_link_box">
+                        <h4>Links</h4>
+                        <div class="info_links">
+                            <a href="index.html">Home</a>
+                            <a href="job_listings.php">Jobs</a>
+                            <a href="submitpostings.html">Post a Job</a>
+                            <a href="review_faq.php">Reviews</a>
+                            <a href="student_login.php">Login</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 info_col">
+                    <h4>Subscribe</h4>
+                    <form action="#">
+                        <input type="text" placeholder="Enter email" />
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="col-md-6 col-lg-3 info_col">
-          <div class="info_detail">
-            <h4>
-              Resources
-            </h4>
-            <p>
-              Access career resources, resume templates, and interview tips to help you succeed in your job search.
-            </p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-2 mx-auto info_col">
-          <div class="info_link_box">
-            <h4>
-              Quick Links
-            </h4>
-            <div class="info_links">
-              <a href="index.html">Home</a>
-              <a href="job_listings.php">Job Listings</a>
-              <a href="student_login.php">Student Login</a>
-              <a href="submitpostings.html">Post a Job</a>
-              <a href="admin_login.php">Admin Portal</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
+    </section>
+    <!-- end info section -->
 
     <!-- footer section -->
     <section class="footer_section">
