@@ -316,10 +316,10 @@ body {
                     <div class="col-md-3">
                         <select name="job_type" class="form-control">
                             <option value="">All Job Types</option>
-                            <option value="internship" <?php echo $job_type_filter === 'internship' ? 'selected' : ''; ?>>Internship</option>
-                            <option value="part-time" <?php echo $job_type_filter === 'part-time' ? 'selected' : ''; ?>>Part-Time</option>
-                            <option value="full-time" <?php echo $job_type_filter === 'full-time' ? 'selected' : ''; ?>>Full-Time</option>
-                            <option value="entry-level" <?php echo $job_type_filter === 'entry-level' ? 'selected' : ''; ?>>Entry-Level</option>
+                            <option value="Internship" <?php echo $job_type_filter === 'Internship' ? 'selected' : ''; ?>>Internship</option>
+                            <option value="Part-Time" <?php echo $job_type_filter === 'Part-Time' ? 'selected' : ''; ?>>Part-Time</option>
+                            <option value="Full-Time" <?php echo $job_type_filter === 'Full-Time' ? 'selected' : ''; ?>>Full-Time</option>
+                            <option value="Entry-Level" <?php echo $job_type_filter === 'Entry-Level' ? 'selected' : ''; ?>>Entry-Level</option>
                         </select>
                     </div>
                     <div class="col-md-2">
