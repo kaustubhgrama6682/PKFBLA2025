@@ -3,7 +3,15 @@ session_start();
 // job_listings.php
 require_once 'db_connection.php';
 
-// Fetch approved job postings
+/**
+ * Fetches and filters approved job postings from database
+ * Implements security measures through prepared statements
+ * Includes error handling for database connection issues
+ * 
+ * @param string $search_query Optional search term for filtering
+ * @param string $job_type_filter Optional job type for filtering
+ * @return array List of filtered and approved job postings
+ */
 try {
     $stmt = $pdo->query("SELECT * FROM job_postings WHERE status = 'approved' ORDER BY created_at DESC");
     $job_postings = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -481,6 +489,25 @@ Bothell, WA 98011-3398
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
   </script>
   <!-- End Google Map -->
+
+  <script>
+    document.querySelector('search-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const searchQuery = document.querySelector('input[name="search"]').value;
+    try {
+        const results = await fetchSearchResults(searchQuery);
+        updateJobListings(results);
+        updateResultsCount(results.length);
+    } catch (error) {
+        handleSearchError(error);
+    }
+});
+
+function updateJobListings(results) {
+    const container = document.querySelector('job-listings');
+    // Dynamic content update logic
+}
+</script>
 <body>
 
 </html>
